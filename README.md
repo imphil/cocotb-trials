@@ -36,7 +36,7 @@ see [the documentation](https://docs.cocotb.org/en/stable/install.html).
 For details on how to install the *development* version of cocotb,
 see [the preliminary documentation of the future release](https://docs.cocotb.org/en/latest/install_devel.html#install-devel).
 
-## Usage
+## Usage2
 
 As a first trivial introduction to cocotb, the following example "tests" a flip-flop.
 
