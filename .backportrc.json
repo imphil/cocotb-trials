@@ -3,11 +3,18 @@
   "repoOwner": "imphil",
   "repoName": "cocotb-trials",
 
+  // Create a PR even if there are merge conflicts.
+  "commitConflicts": true,
+
   // Branches to backport to.
   "targetBranchChoices": [
     "master",
     "stable/1.9"
   ],
+
+  // In GitHub PR comments made by the bot, suggest that users run
+  // "npx backport", which automatically installs backport if necessary.
+  "backportBinary": "npx backport",
 
   // Use `backport?:stable/VERSION` as indication of the target branch.
   // Note: backslashes must be escaped.
