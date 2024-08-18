@@ -40,14 +40,30 @@ jobs:
       - name: cond4
         run: echo '${{ contains(github.event.pull_request.labels[0].name, 'backport-to:') }}'
 
-  backport-create:
+  backport:
     name: Backport PR
-    # Also update branchLabelMapping in .backportrc.json when changing the label
-    # here.
-    if: github.event.pull_request.merged == true && contains(github.event.pull_request.labels.*.name, 'backport-to:')
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
-      - name: Backport Actionw
+      # Run the backport action only on PRs with one of the `backport-to:`
+      # labels applied.
+      #
+      # Also update `branchLabelMapping` in `.backportrc.json` when changing the
+      # label here.
+      #
+      # Implementation note: GitHub's contains() is matching the full string
+      # when operating on an array (and startsWith() does not operate on arrays
+      # at all). Do the label matching with jq instead.
+      - name: Check for backport labels
+        id: check_labels
+        run: |-
+          labels='${{ toJSON(github.event.pull_request.labels.*.name) }}'
+          matched=$(echo $labels | jq '.|map(select(startswith("backport-to:"))) | length')
+          echo "matched=$matched"
+          echo "matched=$matched" >> $GITHUB_OUTPUT
+
+      - name: Backport Action
+        if: fromJSON(steps.check_labels.outputs.matched) > 0
         uses: sorenlouv/backport-github-action@v9.5.1
         with:
           # GITHUB_TOKEN is available by default, but the powers it has are
