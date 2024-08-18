@@ -1,0 +1,41 @@
+# Copyright cocotb contributors
+# Licensed under the Revised BSD License, see LICENSE for details.
+# SPDX-License-Identifier: BSD-3-Clause
+
+# A workflow to automatically backport pull requests to a stable branch.
+#
+# This workflow uses the Backport CLI (https://github.com/sorenlouv/backport)
+# under the hood, which is configured in `.backportrc.json` in the repository
+# root.
+#
+# See https://github.com/sorenlouv/backport-github-action for documentation
+# on the used action.
+
+name: Backport PRs to stable branches
+
+on:
+  pull_request_target:
+    # Run this workflow when a label on a PR is added, or if it's closed.
+    types: ["labeled", "closed"]
+
+jobs:
+  backport-create:
+    name: Backport PR
+    if: github.event.pull_request.merged == true && !(startsWith(github.event.pull_request.labels.*.name, 'backport?:'))
+    runs-on: ubuntu-latest
+    steps:
+      - name: Backport Action
+        uses: sorenlouv/backport-github-action@v9.5.1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Info log
+        if: ${{ success() }}
+        run: cat ~/.backport/backport.info.log
+
+      - name: Debug log
+        if: ${{ failure() }}
+        run: cat ~/.backport/backport.debug.log
+
+  # TODO: Add a workflow that modifies the backport? to a backport+ label once
+  # the associated backport PR has been merged.
