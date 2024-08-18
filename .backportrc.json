@@ -1,4 +1,5 @@
-// .backportrc.json
+// Documentation at
+// https://github.com/sorenlouv/backport/blob/main/docs/config-file-options.md
 // Comments are allowed, trailing commas are not.
 {
   "repoOwner": "imphil",
