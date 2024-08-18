@@ -1,0 +1,22 @@
+// .backportrc.json
+{
+  "repoOwner": "imphil",
+  "repoName": "cocotb-trials",
+
+  // Branches to backport to.
+  "targetBranchChoices": [
+    "stable/1.9"
+  ],
+
+  // Use `backport?:stable/VERSION` as indication of the target branch.
+  // Note: backslashes must be escaped.
+  "branchLabelMapping": {
+    "^backport?:(\\d\\.\\d)$": "stable/$1"
+  },
+
+  // Assign the label `backport-done` after a backport completed.
+  //"sourcePRLabels": ["backport-done"],
+
+  // Leave a note in the source PR if a backport failed.
+  "publishStatusCommentOnFailure": true
+}
