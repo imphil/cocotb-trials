@@ -21,7 +21,9 @@ on:
 jobs:
   backport-create:
     name: Backport PR
-    if: github.event.pull_request.merged == true && !(startsWith(github.event.pull_request.labels.*.name, 'backport-to:'))
+    # Also update branchLabelMapping in .backportrc.json when changing the label
+    # here.
+    if: github.event.pull_request.merged == true && startsWith(github.event.pull_request.labels.*.name, 'backport-to:')
     runs-on: ubuntu-latest
     steps:
       - name: Backport Action

@@ -10,12 +10,13 @@
   ],
 
   // Use `backport-to:VERSION` as indication of the target branch.
+  // Also update .github/workflows/backport.yml when changing the label here.
   "branchLabelMapping": {
     "^backport-to:(\\d\\.\\d)$": "stable/$1"
   },
 
-  // Assign the label `backport-created` after opening the backport PR(s).
-  "sourcePRLabels": ["backport-created"],
+  // Assign the label `status:backport-created` after opening the backport PR(s).
+  "sourcePRLabels": ["status:backport-created"],
 
   // In GitHub PR comments made by the bot, suggest that users run
   // "npx backport", which automatically installs backport if necessary.
