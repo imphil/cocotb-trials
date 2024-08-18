@@ -5,6 +5,7 @@
 
   // Branches to backport to.
   "targetBranchChoices": [
+    "master",
     "stable/1.9"
   ],
 
@@ -13,6 +14,9 @@
   "branchLabelMapping": {
     "^backport?:(\\d\\.\\d)$": "stable/$1"
   },
+
+  // TODO: Necessary?
+  "backportBranchName": "backport/{{targetBranch}}-{{refValues}}",
 
   // Assign the label `backport-done` after a backport completed.
   //"sourcePRLabels": ["backport-done"],
