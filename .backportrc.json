@@ -20,13 +20,16 @@
   // Labels assigned to the source PR after opening the backport PR(s).
   "sourcePRLabels": ["status:backport-created"],
 
-  // Labels added to the newly created backport PR(s).
-  "targetPRLabels": ["type:backport"],
-
   // In GitHub PR comments made by the bot suggest that users run
   // "npx backport", which automatically installs backport if necessary.
   "backportBinary": "npx backport",
 
   // Leave a note in the source PR if a backport failed.
-  "publishStatusCommentOnFailure": true
+  "publishStatusCommentOnFailure": true,
+
+  // Title of the backport PR(s).
+  "prTitle": "[{{targetBranch}}] Backport PR #{{sourcePullRequest.number}}: {{sourcePullRequest.title}}",
+
+  // Labels added to the newly created backport PR(s).
+  "targetPRLabels": ["type:backport"]
 }
