@@ -1,4 +1,5 @@
 // .backportrc.json
+// Comments are allowed, trailing commas are not.
 {
   "repoOwner": "imphil",
   "repoName": "cocotb-trials",
@@ -15,10 +16,13 @@
     "^backport-to:(\\d+\\.\\d+)$": "stable/$1"
   },
 
-  // Assign the label `status:backport-created` after opening the backport PR(s).
+  // Labels assigned to the source PR after opening the backport PR(s).
   "sourcePRLabels": ["status:backport-created"],
 
-  // In GitHub PR comments made by the bot, suggest that users run
+  // Labels added to the newly created backport PR(s).
+  "targetPRLabels": ["type:backport"],
+
+  // In GitHub PR comments made by the bot suggest that users run
   // "npx backport", which automatically installs backport if necessary.
   "backportBinary": "npx backport",
 
