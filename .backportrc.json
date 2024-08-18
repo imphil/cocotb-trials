@@ -3,30 +3,23 @@
   "repoOwner": "imphil",
   "repoName": "cocotb-trials",
 
-  // Create a PR even if there are merge conflicts.
-  "commitConflicts": true,
-
   // Branches to backport to.
   "targetBranchChoices": [
-    "master",
-    "stable/1.9"
+    "stable/1.8",
+    "stable/1.9",
   ],
+
+  // Use `backport-to:VERSION` as indication of the target branch.
+  "branchLabelMapping": {
+    "^backport-to:(\\d\\.\\d)$": "stable/$1"
+  },
+
+  // Assign the label `backport-created` after opening the backport PR(s).
+  "sourcePRLabels": ["backport-created"],
 
   // In GitHub PR comments made by the bot, suggest that users run
   // "npx backport", which automatically installs backport if necessary.
   "backportBinary": "npx backport",
-
-  // Use `backport?:stable/VERSION` as indication of the target branch.
-  // Note: backslashes must be escaped.
-  "branchLabelMapping": {
-    "^backport\\?:(\\d\\.\\d)$": "stable/$1"
-  },
-
-  // TODO: Necessary?
-  //"backportBranchName": "backport/{{targetBranch}}-{{refValues}}",
-
-  // Assign the label `backport-done` after a backport completed.
-  //"sourcePRLabels": ["backport-done"],
 
   // Leave a note in the source PR if a backport failed.
   "publishStatusCommentOnFailure": true

@@ -21,7 +21,7 @@ on:
 jobs:
   backport-create:
     name: Backport PR
-    if: github.event.pull_request.merged == true && !(startsWith(github.event.pull_request.labels.*.name, 'backport?:'))
+    if: github.event.pull_request.merged == true && !(startsWith(github.event.pull_request.labels.*.name, 'backport-to:'))
     runs-on: ubuntu-latest
     steps:
       - name: Backport Action
@@ -32,7 +32,6 @@ jobs:
           # https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/enabling-features-for-your-repository/managing-github-actions-settings-for-a-repository#setting-the-permissions-of-the-github_token-for-your-repository
           # to "Allow GitHub Actions to create and approve pull requests".
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          #auto_backport_label_prefix: backport-to-
 
       - name: Info log
         if: ${{ success() }}
@@ -41,6 +40,3 @@ jobs:
       - name: Debug log
         if: ${{ failure() }}
         run: cat ~/.backport/backport.debug.log
-
-  # TODO: Add a workflow that modifies the backport? to a backport+ label once
-  # the associated backport PR has been merged.
