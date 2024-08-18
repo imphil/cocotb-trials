@@ -25,10 +25,20 @@ jobs:
     steps:
       - name: echo-out
         run: echo '${{ toJSON(github.event) }}'
+      - name: echo-out2
+        run: echo '${{ toJSON(github.event.pull_request.labels) }}'
+      - name: echo-out3
+        run: echo '${{ toJson(github.event.pull_request.labels.*.name) }}'
       - name: cond1
         run: echo '${{ github.event.pull_request.merged == true }}'
       - name: cond2
         run: echo '${{ contains(github.event.pull_request.labels.*.name, 'backport-to:') }}'
+      - name: cond2a
+        run: echo '${{ startsWith(github.event.pull_request.labels.*.name, 'backport-to:') }}'
+      - name: cond3
+        run: echo '${{ startsWith(github.event.pull_request.labels[0].name, 'backport-to:') }}'
+      - name: cond4
+        run: echo '${{ contains(github.event.pull_request.labels[0].name, 'backport-to:') }}'
 
   backport-create:
     name: Backport PR
@@ -37,7 +47,7 @@ jobs:
     if: github.event.pull_request.merged == true && contains(github.event.pull_request.labels.*.name, 'backport-to:')
     runs-on: ubuntu-latest
     steps:
-      - name: Backport Action
+      - name: Backport Actionw
         uses: sorenlouv/backport-github-action@v9.5.1
         with:
           # GITHUB_TOKEN is available by default, but the powers it has are
