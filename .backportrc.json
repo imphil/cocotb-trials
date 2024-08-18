@@ -6,13 +6,13 @@
   // Branches to backport to.
   "targetBranchChoices": [
     "stable/1.8",
-    "stable/1.9",
+    "stable/1.9"
   ],
 
   // Use `backport-to:VERSION` as indication of the target branch.
   // Also update .github/workflows/backport.yml when changing the label here.
   "branchLabelMapping": {
-    "^backport-to:(\\d\\.\\d)$": "stable/$1"
+    "^backport-to:(\\d+\\.\\d+)$": "stable/$1"
   },
 
   // Assign the label `status:backport-created` after opening the backport PR(s).
