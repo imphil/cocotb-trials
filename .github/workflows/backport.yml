@@ -19,6 +19,17 @@ on:
     types: ["labeled", "closed"]
 
 jobs:
+  test:
+    name: dump
+    runs-on: ubuntu-latest
+    steps:
+      - name: echo-out
+        run: echo '${{ toJSON(github.event) }}'
+      - name: cond1
+        run: echo '${{ github.event.pull_request.merged == true }}'
+      - name: cond2
+        run: echo '${{ contains(github.event.pull_request.labels.*.name, 'backport-to:') }}'
+
   backport-create:
     name: Backport PR
     # Also update branchLabelMapping in .backportrc.json when changing the label
