@@ -12,11 +12,11 @@
   // Use `backport?:stable/VERSION` as indication of the target branch.
   // Note: backslashes must be escaped.
   "branchLabelMapping": {
-    "^backport?:(\\d\\.\\d)$": "stable/$1"
+    "^backport\\?:(\\d\\.\\d)$": "stable/$1"
   },
 
   // TODO: Necessary?
-  "backportBranchName": "backport/{{targetBranch}}-{{refValues}}",
+  //"backportBranchName": "backport/{{targetBranch}}-{{refValues}}",
 
   // Assign the label `backport-done` after a backport completed.
   //"sourcePRLabels": ["backport-done"],
